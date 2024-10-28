@@ -1,0 +1,98 @@
+service: challenge-aws-lambda-swap-api
+useDotenv: true
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage:  prod
+  region: ${env:AWS_REGION}
+  environment:
+    JWT_SECRET: ${env:JWT_SECRET}
+    DYNAMODB_TABLE_CHALLENGE_USER: ${env:DYNAMODB_TABLE_CHALLENGE_USER}
+    DYNAMODB_TABLE_CHALLENGE_PLANET: ${env:DYNAMODB_TABLE_CHALLENGE_PLANET}
+    NODE_ENV: ${env:NODE_ENV}
+    SWAPI_BASE_URL: ${env:SWAPI_BASE_URL}
+  deploymentBucket:
+    name: ${self:custom.deploymentBucketName}
+    serverSideEncryption: AES256
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - lambda:*
+          Resource: "*"
+custom:
+  prefix: "${self:service}"
+  deploymentBucketName: ${env:CONFIG_AWS_S3_BUCKET_NAME}
+  deploymentBucket:
+    blockPublicAccess: true
+    accelerate: true
+    versioning: false
+    tags:
+      - Key: ENV
+        Value: PROD
+      - Key: APID
+        Value: ${self:provider.stage}
+
+package:
+  patterns:
+    - '!layers/**'
+  individually: true
+
+functions:
+  main:
+    handler: dist/src/lambda.handler
+    name: ${self:custom.prefix}-main
+    events:
+      - http: #/api/hello
+          method: get
+          path: /api/hello
+          cors: true
+      # cognito environment endpoints
+      - http: #/api/auth/signin
+          method: post
+          path: /cognito/signin
+          cors: true
+      - http: #/api/auth/signup
+          method: post
+          path: /cognito/signup
+          cors: true
+      # planet environment endpoints
+      - http: #/api/planet
+          method: post
+          path: /api/planet
+          cors: true
+      - http: #/api/planet
+          method: get
+          path: /api/planet
+          cors: true
+      - http: #/api/planet/:id
+          method: get
+          path: /api/planet/{id}
+          cors: true
+      # swapi environment endpoints
+      - http: #/api/swapi/people
+          method: get
+          path: /api/swapi/people
+          cors: true
+      - http: #/api/swapi/people/:id
+          method: get
+          path: /api/swapi/people/{id}
+          cors: true
+      - http: #/api/swapi/planets
+          method: get
+          path: /api/swapi/planets
+          cors: true
+      - http: #/api/swapi/planets/:id
+          method: get
+          path: /api/swapi/planets/{id}
+          cors: true
+      - http: #/api/docs
+          method: get
+          path: /api/docs
+          cors: true
+
+plugins:
+  - serverless-deployment-bucket
