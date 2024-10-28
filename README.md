@@ -65,5 +65,5 @@ Y al iniciar sesión, obtendrá un token, el cual será necesario para hacer cua
 
 ## Consultas a la API
 
-La documentación de los endpoint las puede obtener en el la ruta de Swagger: `{URL}/api/docs`
+La documentación de los endpoint las puede obtener en el la ruta de [Swagger](https://technicalchallegnenodejs-production.up.railway.app/api/docs)
 
