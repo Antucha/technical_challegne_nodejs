@@ -49,6 +49,8 @@ $ serverless deploy --verbose
 
 # Uso del MySwapi Challenge
 
+La url habilitada para pruebas es la siguiente: `https://technicalchallegnenodejs-production.up.railway.app`
+
 ## Login
 Necesita iniciar sesión en el endpoing `signin` mediante las siguientes credenciales:
 
