@@ -17,7 +17,7 @@ Se utilizó Node JS como base en su framework Nest JS.
 
 ## Consultas a la API
 
-La documentación de los endpoint las puede obtener en el la ruta de [Swagger{:target="_blank"}](https://technicalchallegnenodejs-production.up.railway.app/api/docs) ya que el aplicativo se integró con esa herramienta para generar la documentación de manera automática.
+La documentación de los endpoint las puede obtener en el la ruta de <a href="https://technicalchallegnenodejs-production.up.railway.app/api/docs" target="_blank">Swagger</a> ya que el aplicativo se integró con esa herramienta para generar la documentación de manera automática.
 
 ## Login
 Necesita iniciar sesión en el endpoing `signin` mediante las siguientes credenciales:
