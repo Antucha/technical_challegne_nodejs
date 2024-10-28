@@ -35,6 +35,7 @@ async function bootstrap() {
   SwaggerModule.setup('api/docs', app, document);
 
   // Escuchar en el puerto 4000
-  await app.listen(4000, '0.0.0.0');
+  const PORT = process.env.PORT || 4000;
+  await app.listen(PORT, '0.0.0.0');
 }
 bootstrap();
