@@ -1,8 +1,41 @@
 
+# Uso del MySwapi Challenge
 
-## Descrición
+La url habilitada para pruebas es la siguiente: `https://technicalchallegnenodejs-production.up.railway.app`
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Descripción
+
+Se utilizó Node JS como base en su framework Nest JS.
+ - Se utilizó DynamoDB como base de datos de almacén.
+ - Se generó el documento `serverless.yml` para realizar el despliegue mediante serverless framework.
+ - Se crearon algunos enpoint personalizados POST y GET para insertar datos en la base de datos y para recuperar esa información.
+ - Se integó com SWAPI para hacer consultas sobre los endpoint people y planet.
+ - Se redactó esta documentación de uso.
+ - Se generó documentación técnica con Swagger.
+
+
+## Consultas a la API
+
+La documentación de los endpoint las puede obtener en el la ruta de [Swagger](https://technicalchallegnenodejs-production.up.railway.app/api/docs) ya que el aplicativo se integró con esa herramienta para generar la documentación de manera automática.
+
+## Login
+Necesita iniciar sesión en el endpoing `signin` mediante las siguientes credenciales:
+
+```json
+{
+    "email": "johndoe@example.com",
+    "password": "P@ssw0rd123",
+    "role": "admin"
+}
+
+```
+
+Y al iniciar sesión, obtendrá un token, el cual será necesario para hacer cualquier consulta en el aplicativo mediante Bearer token.
+
+
+
+# Información técnica
+
 
 ## Instalación de dependencias
 
@@ -42,30 +75,8 @@ $ yarn run test:cov
 ```
 
 ## Despliegue
-Para desplegar el aplicativo mediante serverless se debe ejecutar
+Para desplegar el aplicativo mediante serverless se debe ejecutar:
 ```bash
 $ serverless deploy --verbose
 ```
-
-# Uso del MySwapi Challenge
-
-La url habilitada para pruebas es la siguiente: `https://technicalchallegnenodejs-production.up.railway.app`
-
-## Login
-Necesita iniciar sesión en el endpoing `signin` mediante las siguientes credenciales:
-
-```json
-{
-    "email": "johndoe@example.com",
-    "password": "P@ssw0rd123",
-    "role": "admin"
-}
-
-```
-
-Y al iniciar sesión, obtendrá un token, el cual será necesario para hacer cualquier consulta en el aplicativo.
-
-## Consultas a la API
-
-La documentación de los endpoint las puede obtener en el la ruta de [Swagger](https://technicalchallegnenodejs-production.up.railway.app/api/docs)
 
