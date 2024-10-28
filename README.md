@@ -9,7 +9,7 @@ Se utilizó Node JS como base en su framework Nest JS.
  - Se utilizó DynamoDB como base de datos de almacén.
  - Se generó el documento `serverless.yml` para realizar el despliegue mediante serverless framework.
  - Se crearon algunos enpoint personalizados POST y GET para insertar datos en la base de datos y para recuperar esa información.
- - Se integó com SWAPI para hacer consultas sobre los endpoint people y planet.
+ - Se integró com SWAPI para hacer consultas sobre los endpoint people y planet.
  - Se redactó esta documentación de uso.
  - Se generó documentación técnica con Swagger.
  - Se realizó test unitario sobre uno de los servicios del aplicativo.
