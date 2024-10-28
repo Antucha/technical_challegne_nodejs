@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "536ef231-2fcd-4840-859f-a3f830287625",
+		"name": "ChallengeNodeJS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16086548"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Update TOKEN environment variable\", function () {\r",
+									"    // Verifica que la respuesta tenga un código de estado 200 (éxito)\r",
+									"    pm.response.to.have.status(200);\r",
+									"    \r",
+									"    // Obtén el valor del nuevo token de la respuesta\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var newToken = jsonData.token; // Cambia 'new_token' por la clave correcta de tu respuesta JSON\r",
+									"\r",
+									"    // // Actualiza la variable de entorno TOKEN con el nuevo valor\r",
+									"    pm.collectionVariables.set(\"DEV_CHALLENGE_TOKEN\", newToken);\r",
+									"    \r",
+									"    // Imprime el nuevo valor del token en la consola para verificar\r",
+									"    console.log(\"Nuevo valor de TOKEN:\", newToken);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"johndoe@example.com\",\r\n    \"password\": \"P@ssw0rd123\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEV_CHALLENGE_API_URL}}/auth/signin",
+							"host": [
+								"{{DEV_CHALLENGE_API_URL}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "planet",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{DEV_CHALLENGE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Naboo\",\r\n    \"periodoRotacion\": \"26\",\r\n    \"periodoOrbital\": \"312\",\r\n    \"diametro\": \"12120\",\r\n    \"clima\": \"templado\",\r\n    \"gravedad\": \"1 estándar\",\r\n    \"terreno\": \"praderas, colinas, pantanos\",\r\n    \"aguaSuperficial\": \"12\",\r\n    \"poblacion\": \"4500000000\",\r\n    \"residentes\": [\r\n      \"https://swapi.py4e.com/api/people/3/\",\r\n      \"https://swapi.py4e.com/api/people/21/\",\r\n      \"https://swapi.py4e.com/api/people/35/\"\r\n    ],\r\n    \"peliculas\": [\r\n      \"https://swapi.py4e.com/api/films/3/\",\r\n      \"https://swapi.py4e.com/api/films/4/\",\r\n      \"https://swapi.py4e.com/api/films/5/\"\r\n    ],\r\n    \"creado\": \"2024-10-27T14:50:49.641Z\",\r\n    \"editado\": \"2024-10-27T21:58:18.411Z\",\r\n    \"url\": \"https://swapi.py4e.com/api/planets/8/\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEV_CHALLENGE_API_URL}}/planet",
+							"host": [
+								"{{DEV_CHALLENGE_API_URL}}"
+							],
+							"path": [
+								"planet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{DEV_CHALLENGE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEV_CHALLENGE_API_URL}}/planet",
+							"host": [
+								"{{DEV_CHALLENGE_API_URL}}"
+							],
+							"path": [
+								"planet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOne",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{DEV_CHALLENGE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEV_CHALLENGE_API_URL}}/planet/2e421d56-9703-4784-95c5-c79ae569929a",
+							"host": [
+								"{{DEV_CHALLENGE_API_URL}}"
+							],
+							"path": [
+								"planet",
+								"2e421d56-9703-4784-95c5-c79ae569929a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "swapi",
+			"item": [
+				{
+					"name": "people",
+					"item": [
+						{
+							"name": "getAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{DEV_CHALLENGE_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DEV_CHALLENGE_API_URL}}/swapi/people",
+									"host": [
+										"{{DEV_CHALLENGE_API_URL}}"
+									],
+									"path": [
+										"swapi",
+										"people"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOne",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{DEV_CHALLENGE_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DEV_CHALLENGE_API_URL}}/swapi/people/1",
+									"host": [
+										"{{DEV_CHALLENGE_API_URL}}"
+									],
+									"path": [
+										"swapi",
+										"people",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "planet",
+					"item": [
+						{
+							"name": "getAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{DEV_CHALLENGE_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DEV_CHALLENGE_API_URL}}/swapi/planets",
+									"host": [
+										"{{DEV_CHALLENGE_API_URL}}"
+									],
+									"path": [
+										"swapi",
+										"planets"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOne",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{DEV_CHALLENGE_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DEV_CHALLENGE_API_URL}}/swapi/planets/1",
+									"host": [
+										"{{DEV_CHALLENGE_API_URL}}"
+									],
+									"path": [
+										"swapi",
+										"planets",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "DEV_CHALLENGE_API_URL",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "DEV_CHALLENGE_TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

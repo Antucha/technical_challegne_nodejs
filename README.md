@@ -13,6 +13,7 @@ Se utilizó Node JS como base en su framework Nest JS.
  - Se redactó esta documentación de uso.
  - Se generó documentación técnica con Swagger.
  - Se realizó test unitario sobre uno de los servicios del aplicativo.
+ - Se agrega el archivo `ChallengeNodeJS.postman_collection.json` en este repositorio para importar la configuración de POSTMAN.
 
 
 ## Consultas a la API
